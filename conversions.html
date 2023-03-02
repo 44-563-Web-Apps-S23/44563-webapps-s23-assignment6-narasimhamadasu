@@ -1,39 +1,97 @@
 <!DOCTYPE html>
 <html>
- 
+    <head>
+        <title>here you can check conversitions</title>
+        <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" 
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+      <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" 
+        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" 
+        integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>
+     </head>
 <body>
 
-<h2>Getting input</h2>
-
-<form>
-    <label for="form1_age">What is your age </label>
-    <input type ="number" id="form1_age" name="form1_age" min=10 max=50 step=2 value=30> <br>
-
-    <label for="form1_nick">What is your nickname </label>
-    <input type ="text" id="form1_nick" name="form1_nick" autofocus> <br>
-
-    <input type="button" onclick="resolveForm()" value="Get values from form">
-</form>
-
-
-<p id="result">This text will be replaced </p>
-
-<script> 
-
-function resolveForm (){
-    console.log("Getting form values")
-    age = document.getElementById("form1_age").value
-    nick = document.getElementById("form1_nick").value
-    confirmed = confirm("Are these the values? "+age+" and "+nick)
+    <h2>RajKumar shows currency conversions</h2>
+    <div class="container">
+    <form>
+        <div class="mb-2">
+        <label for="form1_base">Enter base amount </label>
+        <input class="form-control" type ="number" id="form1_base" name="form1_base" value=50> <br>
+        </div>
+        <div class="mb-2">
+        <label for="form1_conv">Enter the conversion rate </label>
+        <input class="form-control" type ="number" id="form1_conv" name="form1_conv" value=35> <br>
+        </div>
+        <button class="btn btn-primary" type="button" onclick="convert()" value="">Show conversions</button>
+    </form>
     
-    out = document.getElementById("result")
-    if(confirmed){
-        out.innerHTML = "Values were confirmed"
-    } else {
-        out.innerHTML = "Values were not confirmed"
+    <p id="result">conversions will be shown here </p>
+    </div>
+    
+    <div class="container">
+    <form>
+        <div class="form-check">
+        <input class="form-check-input" type="radio" onclick="chooseOp()" id="rg1_mean" name="radioVal" value="mean">
+        <label for="rg1_mean">average</label></br>
+        </div>
+        <div class="form-check">
+        <input class="form-check-input" type="radio" onclick="chooseOp()" id="rg1_max" name="radioVal" value="maximum">
+        <label for="rg1_max">max</label></br>
+        </div>
+        <div class="form-check">
+        <input class="form-check-input" type="radio" onclick="chooseOp()" id="rg1_min" name="radioVal" value="minimum">
+        <label for="rg1_min">min</label></br>
+        </div>
+      </form>
+    
+      <p id="result1">find mean, max or min</p>
+    </div>
+    
+    <script> 
+    
+    function convert(){
+        console.log("Getting form values")
+        var toShow = ''
+        var multiply = 1
+        base = document.getElementById("form1_base").value
+        conv = document.getElementById("form1_conv").value
+        for(var i=0;i<5;i++){
+            let res = multiply*base*conv;
+            res = Math.round(res*10)/10;
+            toShow += " "+base*multiply+" value is "+res+";"
+            multiply *= 2
+        }
+        out = document.getElementById("result")
+        out.innerHTML = "Conversions are :"+toShow.toString();
     }
-}
-</script>
+    
+    function chooseOp(){
+        base = document.getElementById("form1_base").value
+        conv = document.getElementById("form1_conv").value
+        var ele = document.getElementsByName('radioVal');
+        var radioVal;   
+            for(i = 0; i < ele.length; i++) {
+                if(ele[i].checked){
+                   radioVal = ele[i].value 
+                }
+            }
+        var out2 = document.getElementById("result1")
+        var max, min, toShow = '';
+        max = Math.max(base, conv);
+        min = Math.min(base, conv);
+        if(radioVal === "mean"){
+            toShow = "mean of "+base+" and "+conv+" is : "+(parseFloat(base)+parseFloat(conv))/2
+        }else if(radioVal === "maximum"){
+            toShow = "maxmimum of "+base+" and "+conv+" is : "+max
+        }else if(radioVal === "minimum"){
+            toShow = "minimum of "+base+" and "+conv+" is : "+min;
+        }   
+        out2.innerHTML = toShow.toString() 
+    }
+    </script>
 
 </body>
 </html> 

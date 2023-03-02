@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+ <head>
+    <title>candies</title>
+    <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" 
+    integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" 
+    integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" 
+    integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>
+ </head>
+<body>
+
+<h2>Rajkumar chooses candy</h2>
+
+<div class="container">
+<form>
+    <div class="form-check">
+    <input class="form-check-input" type="checkbox" id="cb1_chocolate" name="chocolate"   
+      value="True">
+    <label for="cb1_chocolate">Dark Chocolate</label></br>
+</div>
+    <div class="form-check">
+    <input class="form-check-input" type="checkbox" id="cb1_nuts" name="nuts" 
+       value="True">
+    <label for="cb1_nuts">Nuts</label></br>
+</div>
+    <div class="form-check">
+    <input class="form-check-input" type="checkbox" id="cb1_chewy" name="chewy"   
+       value="False">
+    <label for="cb1_chewy">Chewy</label></br>
+</div>
+    <button class="btn btn-primary" type="button" onclick="selectBox()" value="">Select a box </button>
+</form>
+
+<br>
+
+<form>
+    <div class="mb-1">
+    <label for="form1_size">Enter the size </label>
+    <input class="form-control" type ="text" id="form1_size" name="form1_size" value="size"> <br>
+</div>
+    <div class="mb-1">
+    <label for="form1_price">Enter price </label>
+    <input class="form-control" type ="text" id="form1_price" name="form1_price" value=""> <br>
+</div>
+    <button class="btn btn-primary" type="button" onclick="updateBox()" value="">Update the box </button>
+</form>
+
+<p id="result">This text will be replaced </p>
+</div>
+
+<script> 
+var my_candy_box = { }
+var out = document.getElementById("result")
+
+function selectBox (){
+    console.log("Getting form values")
+    dark = document.getElementById("cb1_chocolate").checked
+    nuts = document.getElementById("cb1_nuts").checked
+    chewy = document.getElementById("cb1_chewy").checked
+
+    if(dark){
+        my_candy_box["dark"] = "True"
+    }else{
+        my_candy_box["dark"] = "False"
+    }
+    if(nuts){
+        my_candy_box["nuts"] = "True"
+    }else{
+        my_candy_box["nuts"] = "False"
+    }
+    if(chewy){
+        my_candy_box["chewy"] = "True"
+    }else{
+        my_candy_box["chewy"] = "False"
+    }
+    out.innerHTML = JSON.stringify(my_candy_box);
+}
+
+function updateBox(){
+    size = document.getElementById("form1_size").value;
+    price = document.getElementById("form1_price").value;
+    my_candy_box["size"] = size;
+    my_candy_box["price"] = price
+    out.innerHTML = JSON.stringify(my_candy_box)
+}
+</script>
+
+</body>
+</html>
