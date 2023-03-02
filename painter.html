@@ -40,6 +40,39 @@ function checkPainter(){
     out.innerHTML ="Right count: " +good+" Wrong count: "+oops
 }
 </script>
+<div class="container-fluid">
+    <button type="button" onclick="selectImage()">
+        <img src="Abelia.jpg" id="plantImg" style="height: 100px; width: 100;"> </button>
+        <p>Image</p>
+</div>
+
+<script>
+    var useImage=1;
+
+    function selectImage(){
+        switch(useImage){
+        case 1: document.getElementById("plantImg").src="Abelia.jpg";
+        useImage=2;
+        break;
+        case 2: document.getElementById("plantImg").src="Danae.jpg";
+        useImage=3;
+        break;
+        case 3: document.getElementById("plantImg").src="maackia.jpg";
+        useImage=1;
+        break;
+        default: document.getElementById("plantImg").src="Abelia.jpg";
+        useImage=2;
+    }
+    }
+    
+</script>
+<style>
+    body{
+        text-align: center;
+    }
+</style>
+</body>
+</html> 
 
 </body>
 </html>
